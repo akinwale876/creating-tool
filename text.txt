@@ -1,0 +1,223 @@
+
+<!--
+<div class="header-slide-bar" style="overflow:auto;height:160px;">
+<center>
+  
+
+
+<div id="mainslide" style="width: 78%;overflow:auto;">
+
+<?php
+
+
+
+$post_query = mysqli_query($conn,"SELECT * FROM posts WHERE category = 'news' OR category = 'Entertainment' OR  category = 'Sport' ORDER BY id DESC LIMIT 6");
+
+$moviepost_query = mysqli_query($conn,"SELECT * FROM movies ORDER BY id DESC LIMIT 4");
+
+$musicpost_query = mysqli_query($conn,"SELECT * FROM music ORDER BY id DESC LIMIT 4");
+
+
+
+$mydata = '';
+
+while($data = mysqli_fetch_array($post_query)){
+    
+
+
+$htitle = $data['title'];
+$hcategory = $data['category'];
+$hviews = $data['views'];
+$himage = $data['picture_url'];
+$hcomments = $data['comments'];
+
+
+$hcleanurl = $data['cleanurl'];
+
+$hdate = $data['date'];
+
+$hdate = date('M-Y', $hdate);
+
+
+
+$mydata .='
+<a style="text-decoration:none;color:black;" href="http://'. $_SERVER["SERVER_NAME"].'/'.$hcategory.'/'.$hcleanurl.'">
+
+<div class="header-slide-post" style="position:relative;">
+<img alt="" class="header-slide-img" src="'.str_replace('http','https',$himage).'">
+
+<div class="header-slide-post-title">
+<h3 style="margin-bottom:8px;">'.$htitle.'</h3>
+<br>
+
+<b style="color:rgb(100,100,100);position:absolute;left:9px;bottom:10px;"><small><i>'.$hdate.'</i>
+</small>
+
+<span style="margin-left:5px;color:red;font-size:9px;"><i class="fa fa-eye">'.$hviews.'</i></span></b><br>
+<span style="padding:3px;font-size:11px;color:white;border:none;font-weight:bold;position: absolute;top: 1px;"><i class="fa fa-comment">'.$hcomments.'</i></span>
+<span style="color:brown;font-weight:bold;margin-left:4px;font-size:9px;"></span>
+
+</div>
+
+
+    
+</div></a>';
+
+
+
+}
+
+
+while($data = mysqli_fetch_array($moviepost_query)){
+    
+
+
+$htitle = $data['title'];
+$hcategory = 'movie';
+$hviews = $data['views'];
+$himage = $data['picture_url'];
+$hcomments = $data['comments'];
+
+
+$hcleanurl = $data['cleanurl'];
+
+$hdate = $data['date'];
+
+$hdate = date('M-Y', $hdate);
+
+
+
+$mydata .='
+<a style="text-decoration:none;color:black;" href="http://'. $_SERVER["SERVER_NAME"].'/'.$hcategory.'/'.$hcleanurl.'">
+
+<div class="header-slide-post" style="position:relative;">
+<img alt="" class="header-slide-img" src="'.str_replace('http','https',$himage).'">
+
+<div class="header-slide-post-title">
+<h3 style="margin-bottom:8px;">'.$htitle.'</h3>
+<br>
+
+<b style="color:rgb(100,100,100);position:absolute;left:9px;bottom:10px;"><small><i>'.$hdate.'</i>
+</small>
+
+<span style="margin-left:5px;color:red;font-size:9px;"><i class="fa fa-eye">'.$hviews.'</i></span></b><br>
+<span style="padding:3px;font-size:11px;color:white;border:none;font-weight:bold;position: absolute;top: 1px;"><i class="fa fa-comment">'.$hcomments.'</i></span>
+<span style="color:brown;font-weight:bold;margin-left:4px;font-size:9px;"></span>
+
+</div>
+
+
+    
+</div></a>';
+
+
+
+}
+
+
+
+
+while($data = mysqli_fetch_array($musicpost_query)){
+    
+
+
+$htitle = $data['title'];
+$hcategory = 'music';
+$hviews = $data['views'];
+$himage = $data['picture_url'];
+$hcomments = $data['comments'];
+
+
+$hcleanurl = $data['cleanurl'];
+
+$hdate = $data['date'];
+
+$hdate = date('M-Y', $hdate);
+
+
+
+$mydata .='
+<a style="text-decoration:none;color:black;" href="http://'. $_SERVER["SERVER_NAME"].'/'.$hcategory.'/'.$hcleanurl.'">
+
+<div class="header-slide-post" style="position:relative;">
+<img alt="" class="header-slide-img" src="'.str_replace('http','https',$himage).'">
+
+<div class="header-slide-post-title">
+<h3 style="margin-bottom:8px;">'.$htitle.'</h3>
+<br>
+
+<b style="color:rgb(100,100,100);position:absolute;left:9px;bottom:10px;"><small><i>'.$hdate.'</i>
+</small>
+
+<span style="margin-left:5px;color:red;font-size:9px;"><i class="fa fa-eye">'.$hviews.'</i></span></b><br>
+<span style="padding:3px;font-size:11px;color:white;border:none;font-weight:bold;position: absolute;top: 1px;"><i class="fa fa-comment">'.$hcomments.'</i></span>
+<span style="color:brown;font-weight:bold;margin-left:4px;font-size:9px;"></span>
+
+</div>
+
+
+    
+</div></a>';
+
+
+
+}
+
+
+
+echo $mydata;
+
+
+
+?>
+
+
+
+
+
+
+
+
+  
+
+</div>
+
+<!-- main slide-->
+
+</center>
+<br>
+
+
+<style>
+    
+    
+    
+.header-slide-bar::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Track */
+.header-slide-bar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.header-slide-bar::-webkit-scrollbar-thumb {
+  background:#888 ;
+    border-radius: 10px;
+
+}
+
+</style>
+
+
+<span id="slideControl" class="slide-pre"  onclick="headerslide(-1)">&#10094;</span>
+<span id="slideControl1" class="slide-next" onclick="headerslide(1)">&#10095;</span>
+
+
+  </div>
+
+
+<script type="text/javascript" src="myheaderslidescript.js"></script>
+
+-->
